@@ -1,29 +1,31 @@
 <%@ page import="java.util.Scanner" %>
 <%@ page import="java.io.File" %>
-<%@ page import="java.io.PrintWriter" %>
-<%@ page import="java.io.FileOutputStream" %>
 <%@ page import="java.io.FileWriter" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Modify Your Password</title>
+    <title>Modify</title>
     <style>
         h1
         {
-            background: aqua;
+            background: silver;
         }
         .in{
-            border: 1px solid #ccc;
-            padding: 7px 0px;
-            border-radius: 3px;
-            padding-left:5px;
+            border: 1px solid black;
+            padding: 6px 0px;
+            border-radius: 2px;
+            padding-left:6px;
         }
         .but
         {
             border:2px solid;
-            padding:3px 20px;
-            background: #7D7DFF;
+            padding:8px 25px;
+            background: lightskyblue;
             -webkit-border-radius: 25px;
+        }
+        body{
+            background:url("8.jpg") no-repeat;
+            background-size: 100%;
         }
     </style>
 </head>
@@ -31,16 +33,15 @@
     <br>
     <div align="center">
         <h1>
-        当前用户：<%=session.getAttribute("username")%>
+        User<%=session.getAttribute("username")%>Hello,please modify your password
         </h1><br>
     </div>
-
     <form action="update.jsp" method="post">
         <div align="center">
-            Password:<input type="password" name="password" class="in" placeholder="Password"><br>
-            Verify Password:<input type="password" name="password1" class="in" placeholder="Verify Password"><br><br>
-            <input type="submit" class="but" value="Update">
-            <button type="button" class="but"><a href="#" onclick="window.location.href='login.jsp';return false">Back</a></button>
+            Origin Password:<input type="password" name="password" class="in" placeholder="Input your original password"><br>
+            New Password:<input type="password" name="password1" class="in" placeholder="Input your new password"><br><br>
+            <input type="submit" class="but" value="Modify">
+            <button type="button" class="but"><a href="#" onclick="window.location.href='login.jsp';return false">Return</a></button>
 
         </div>
     </form>
@@ -49,7 +50,7 @@
         String password = request.getParameter("password");
         String password1 = request.getParameter("password1");
 
-        File file = new File("userlist.txt");
+        File file = new File("C:\\Users\\SKT丶666\\Desktop\\web\\web\\userlist.txt");
         Scanner cin = new Scanner(file);
         if(password!=null) {
             if (cin.hasNextLine()) {
@@ -64,7 +65,7 @@
                         out.print("<html>" +
                                 "<body>" +
                                 "<script type=\'text/javascript\' language=\'javascript\'>\n" +
-                                "           alert(\'Password Modify Successful!!!\');\n" +
+                                "           alert(\'Modify password successful!\');\n" +
                                 "           window.document.location.href=\'index.jsp\';\n" +
                                 "</script>" +
                                 "</body>");
@@ -73,7 +74,7 @@
                     out.print("<html>" +
                             "<body>" +
                             "<script type=\'text/javascript\' language=\'javascript\'>\n" +
-                            "           alert(\'Original Password Error!!!\');\n" +
+                            "           alert(\'Origin password error!\');\n" +
                             "           window.document.location.href=\'update.jsp\';\n" +
                             "</script>" +
                             "</body>");
